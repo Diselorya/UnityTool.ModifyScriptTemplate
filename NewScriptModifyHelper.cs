@@ -16,7 +16,7 @@ namespace Diselorya.UnityPlugin.ModifyScriptTemplate
     public class NewScriptModifyHelper
     {
         public static readonly string ClassNamePattern = "public class ([A-Za-z0-9_]+)\\s*:\\s*MonoBehaviour";
-        public static readonly string NamespacePattern = @"namespace\s+([A-Za-z0-9.]*)";
+        public static readonly string NamespacePattern = @"namespace\s+([A-Za-z0-9.]+)";
         public static readonly string UsingPattern = @"^using\s+([A-Za-z0-9.]+);\s*";
 
         // 类变量会被其他线程反复重写，直接函数内解决
@@ -47,7 +47,7 @@ namespace Diselorya.UnityPlugin.ModifyScriptTemplate
                 // 获取用系统模板生成的脚本文件内容
                 string[] lines = File.ReadAllLines(path);
                 if (lines is null) return false;
-                File.WriteAllText("D:\\temp\\unity\\testRead.txt", DateTime.Now + Environment.NewLine + String.Join(Environment.NewLine, lines));
+                //File.WriteAllText("D:\\temp\\unity\\testRead.txt", DateTime.Now + Environment.NewLine + String.Join(Environment.NewLine, lines));
 
                 List<string> Lines = new List<string>();
                 List<string> References = new List<string>();
@@ -175,7 +175,7 @@ namespace Diselorya.UnityPlugin.ModifyScriptTemplate
                 m = Regex.Match(line, NewScriptModifyHelper.NamespacePattern);
                 if(m.Success)
                 {
-                    className = m.Groups[1].Value;
+                    namespaceName = m.Groups[1].Value;
                     continue;
                 }
             }
