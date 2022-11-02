@@ -23,10 +23,11 @@ namespace Diselorya.UnityPlugin.ModifyScriptTemplate
             if (path.EndsWith(".cs"))
             {
                 NewScriptModifyHelper.ModifyScript(path);
+
+                // 刷新会导致再次调用 OnWillCreateAsset 事件
+                AssetDatabase.Refresh();
             }
 
-            // 刷新会导致再次调用 OnWillCreateAsset 事件
-            AssetDatabase.Refresh();
         }
     }
 }
